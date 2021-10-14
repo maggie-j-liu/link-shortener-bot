@@ -3,9 +3,15 @@ import { CommandInteraction } from "discord.js";
 const info = {
   data: new SlashCommandBuilder()
     .setName("shorten")
-    .setDescription("Sends a shortened url."),
+    .setDescription("Sends a shortened url.")
+    .addStringOption((option) =>
+      option
+        .setName("url")
+        .setDescription("The URL you would like to shorten.")
+        .setRequired(true)
+    ),
   execute: async (interaction: CommandInteraction) => {
-    await interaction.reply("shorten");
+    await interaction.reply(`shorten ${interaction.options.getString("url")}`);
   },
 };
 
