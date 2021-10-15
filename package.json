@@ -5,10 +5,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development nodemon src/index.ts",
-    "build": "rm -rf dist && tsc",
+    "compile": "rm -rf dist && tsc",
     "start": "node .",
     "deploy:commands": "node dist/scripts/deploy-commands",
-    "deploy": "yarn build && yarn deploy:commands"
+    "build": "yarn compile && yarn deploy:commands"
   },
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
