@@ -1,3 +1,4 @@
+import prisma from "../prisma";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 const info = {
@@ -11,7 +12,13 @@ const info = {
         .setRequired(true)
     ),
   execute: async (interaction: CommandInteraction) => {
-    await interaction.reply(`shorten ${interaction.options.getString("url")}`);
+    const url = interaction.options.getString("url");
+    if (!url) {
+      await interaction.reply("Must include a url.");
+      return;
+    }
+    const route = await prisma.addRandomLink(url);
+    await interaction.reply(`linked ${url} to /${route}`);
   },
 };
 

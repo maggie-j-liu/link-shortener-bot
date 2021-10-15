@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
+import prisma from "../prisma";
 const info = {
   data: new SlashCommandBuilder()
     .setName("link")
@@ -18,11 +19,17 @@ const info = {
         .setRequired(true)
     ),
   execute: async (interaction: CommandInteraction) => {
-    await interaction.reply(
-      `link ${interaction.options.getString(
-        "url"
-      )} to ${interaction.options.getString("route")}`
-    );
+    const route = interaction.options.getString("route");
+    const url = interaction.options.getString("url");
+    if (!route || !url) {
+      await interaction.reply({
+        content: "Must include route and url",
+        ephemeral: true,
+      });
+      return;
+    }
+    await prisma.addLink(route, url);
+    await interaction.reply(`linked ${url} to /${route}`);
   },
 };
 
