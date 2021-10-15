@@ -11,11 +11,11 @@ const linkAdminRoleId = process.env.LINK_ADMIN_ROLE_ID as string;
 const commands: string[] = [];
 
 const commandFiles = fs
-  .readdirSync(`${__dirname}/commands`)
+  .readdirSync(`${__dirname}/../commands`)
   .filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
 
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`).default;
+  const command = require(`../commands/${file}`).default;
   commands.push(command.data.toJSON());
 }
 

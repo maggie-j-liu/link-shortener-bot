@@ -1,6 +1,8 @@
-import prisma from "../prisma";
+import prisma from "../lib/prisma";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
+import { SITE_URL } from "../lib/config";
+
 const info = {
   data: new SlashCommandBuilder()
     .setName("shorten")
@@ -18,7 +20,7 @@ const info = {
       return;
     }
     const route = await prisma.addRandomLink(url);
-    await interaction.reply(`linked ${url} to /${route}`);
+    await interaction.reply(`linked ${url} to ${SITE_URL}/${route}`);
   },
 };
 

@@ -7,7 +7,7 @@
     "dev": "NODE_ENV=development nodemon src/index.ts",
     "build": "rm -rf dist && tsc",
     "start": "node .",
-    "deploy:commands": "node dist/deploy-commands",
+    "deploy:commands": "node dist/scripts/deploy-commands",
     "deploy": "yarn build && yarn deploy:commands"
   },
   "dependencies": {

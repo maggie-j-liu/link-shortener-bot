@@ -1,6 +1,8 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import prisma from "../prisma";
+import { SITE_URL } from "../lib/config";
+import prisma from "../lib/prisma";
+
 const info = {
   data: new SlashCommandBuilder()
     .setName("link")
@@ -29,7 +31,7 @@ const info = {
       return;
     }
     await prisma.addLink(route, url);
-    await interaction.reply(`linked ${url} to /${route}`);
+    await interaction.reply(`linked ${url} to ${SITE_URL}/${route}`);
   },
 };
 
