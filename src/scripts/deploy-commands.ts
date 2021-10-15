@@ -55,6 +55,8 @@ interface FullPermission {
   const restrictedCommands = response.filter(
     (cmd) => cmd.default_permission === false
   );
+  /*
+  console.log(restrictedCommands);
   const fullPermissions: FullPermission[] = [];
   for (const command of restrictedCommands) {
     fullPermissions.push({
@@ -68,9 +70,11 @@ interface FullPermission {
       ],
     });
   }
+  console.log(fullPermissions);
   await rest.put(
     Routes.guildApplicationCommandsPermissions(clientId, guildId),
     { body: fullPermissions }
   );
   console.log("Successfully updated permissions");
+  */
 })();
