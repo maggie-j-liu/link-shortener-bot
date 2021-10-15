@@ -21,7 +21,7 @@ const info = {
         .setRequired(true)
     ),
   execute: async (interaction: CommandInteraction) => {
-    const route = interaction.options.getString("route");
+    let route = interaction.options.getString("route");
     const url = interaction.options.getString("url");
     if (!route || !url) {
       await interaction.reply({
@@ -30,8 +30,27 @@ const info = {
       });
       return;
     }
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      await interaction.reply({
+        content: "Please include the url scheme, for example, https://",
+        ephemeral: true,
+      });
+      return;
+    }
+    if (route.startsWith("/")) {
+      route = route.substring(1);
+    }
+    if (route.includes("/")) {
+      await interaction.reply({
+        content: "The route cannot include `/`.",
+        ephemeral: true,
+      });
+      return;
+    }
     await prisma.addLink(route, url);
-    await interaction.reply(`linked ${url} to ${SITE_URL}/${route}`);
+    await interaction.reply(
+      `linked ${url} to ${SITE_URL}/${encodeURIComponent(route)}`
+    );
   },
 };
 

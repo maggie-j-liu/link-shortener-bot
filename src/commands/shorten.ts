@@ -19,6 +19,13 @@ const info = {
       await interaction.reply("Must include a url.");
       return;
     }
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      await interaction.reply({
+        content: "Please include the url scheme, for example, https://",
+        ephemeral: true,
+      });
+      return;
+    }
     const route = await prisma.addRandomLink(url);
     await interaction.reply(`linked ${url} to ${SITE_URL}/${route}`);
   },
