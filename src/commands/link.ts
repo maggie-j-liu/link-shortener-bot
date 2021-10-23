@@ -19,10 +19,16 @@ const info = {
         .setName("route")
         .setDescription("The route of the short URL you want to use.")
         .setRequired(true)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("private")
+        .setDescription("If true, the link will not be listed publicly.")
     ),
   execute: async (interaction: CommandInteraction) => {
     let route = interaction.options.getString("route");
     const url = interaction.options.getString("url");
+    const priv = interaction.options.getBoolean("private");
     if (!route || !url) {
       await interaction.reply({
         content: "Must include route and url",
@@ -47,9 +53,11 @@ const info = {
       });
       return;
     }
-    await addLink(route, url, interaction.user.id);
+    await addLink(route, url, interaction.user.id, !priv);
     await interaction.reply(
-      `linked ${url} to ${SITE_URL}/${encodeURIComponent(route)}`
+      `Linked ${url} to ${SITE_URL}/${encodeURIComponent(route)} as a ${
+        priv ? "private" : "public"
+      } link.`
     );
   },
 };

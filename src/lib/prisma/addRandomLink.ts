@@ -2,7 +2,7 @@ import prisma from "./index";
 const genRandom = (len: number) => {
   return Math.random().toString(36).substr(2, len);
 };
-const addRandomLink = async (url: string, userId: string) => {
+const addRandomLink = async (url: string, userId: string, pub: boolean) => {
   let failed = true;
   let id;
   while (failed) {
@@ -18,6 +18,7 @@ const addRandomLink = async (url: string, userId: string) => {
           slug: id,
           url,
           addedBy: userId,
+          public: pub,
         },
       });
       failed = false;

@@ -12,9 +12,15 @@ const info = {
         .setName("url")
         .setDescription("The URL you would like to shorten.")
         .setRequired(true)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("private")
+        .setDescription("If true, the link will not be listed publicly.")
     ),
   execute: async (interaction: CommandInteraction) => {
     const url = interaction.options.getString("url");
+    const priv = interaction.options.getBoolean("private");
     if (!url) {
       await interaction.reply("Must include a url.");
       return;
@@ -26,8 +32,12 @@ const info = {
       });
       return;
     }
-    const route = await addRandomLink(url, interaction.user.id);
-    await interaction.reply(`linked ${url} to ${SITE_URL}/${route}`);
+    const route = await addRandomLink(url, interaction.user.id, !priv);
+    await interaction.reply(
+      `Linked ${url} to ${SITE_URL}/${route} as a ${
+        priv ? "private" : "public"
+      } link.`
+    );
   },
 };
 
