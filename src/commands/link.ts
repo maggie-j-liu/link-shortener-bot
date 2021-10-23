@@ -47,7 +47,7 @@ const info = {
       });
       return;
     }
-    await prisma.addLink(route, url);
+    await prisma.addLink(route, url, interaction.user.id);
     await interaction.reply(
       `linked ${url} to ${SITE_URL}/${encodeURIComponent(route)}`
     );

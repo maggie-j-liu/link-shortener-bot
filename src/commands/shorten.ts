@@ -26,7 +26,7 @@ const info = {
       });
       return;
     }
-    const route = await prisma.addRandomLink(url);
+    const route = await prisma.addRandomLink(url, interaction.user.id);
     await interaction.reply(`linked ${url} to ${SITE_URL}/${route}`);
   },
 };

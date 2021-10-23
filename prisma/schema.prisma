@@ -9,6 +9,7 @@ datasource db {
 }
 
 model Link {
-  slug String @id
-  url  String
+  slug    String @id
+  url     String
+  addedBy String @default("")
 }
