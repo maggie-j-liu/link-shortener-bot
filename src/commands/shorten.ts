@@ -1,4 +1,4 @@
-import prisma from "../lib/prisma";
+import addRandomLink from "../lib/prisma/addRandomLink";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import { SITE_URL } from "../lib/config";
@@ -26,7 +26,7 @@ const info = {
       });
       return;
     }
-    const route = await prisma.addRandomLink(url, interaction.user.id);
+    const route = await addRandomLink(url, interaction.user.id);
     await interaction.reply(`linked ${url} to ${SITE_URL}/${route}`);
   },
 };
