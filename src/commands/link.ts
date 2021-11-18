@@ -55,7 +55,7 @@ const info = {
     }
     await addLink(route, url, interaction.user.id, !priv);
     await interaction.reply(
-      `Linked ${url} to ${SITE_URL}/${encodeURIComponent(route)} as a ${
+      `Linked <${url}> to ${SITE_URL}/${encodeURIComponent(route)} as a ${
         priv ? "private" : "public"
       } link.`
     );

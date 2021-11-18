@@ -34,7 +34,7 @@ const info = {
     }
     const route = await addRandomLink(url, interaction.user.id, !priv);
     await interaction.reply(
-      `Linked ${url} to ${SITE_URL}/${route} as a ${
+      `Linked <${url}> to ${SITE_URL}/${route} as a ${
         priv ? "private" : "public"
       } link.`
     );
