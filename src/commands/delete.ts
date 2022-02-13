@@ -25,7 +25,7 @@ const info = {
       return;
     }
     let id = route;
-    if (!route.startsWith(SITE_URL)) {
+    if (route.startsWith(SITE_URL)) {
       id = route.replace(SITE_URL, "");
     }
     let isAdmin = (interaction.member as GuildMember).roles.cache.some(
